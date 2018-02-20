@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**number** | **str** |  | [optional] 
+**number** | **str** | Number with country code | [optional] 
 **number_type** | **str** |  | [optional] 
-**country** | **str** |  | [optional] 
+**region** | [**PhoneNumberRegion**](PhoneNumberRegion.md) |  | [optional] 
 **service** | [**PhoneNumberService**](PhoneNumberService.md) |  | [optional] 
 **rate** | [**PhoneNumberRate**](PhoneNumberRate.md) |  | [optional] 
 

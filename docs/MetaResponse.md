@@ -3,8 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request_uuid** | **str** |  | [optional] 
-**message** | **str** |  | [optional] 
+**request_uuid** | **str** | Unique request ID for debugging purposes | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

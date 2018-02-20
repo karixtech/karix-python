@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**meta** | [**MetaResponse**](MetaResponse.md) |  | [optional] 
-**data** | [**MessageResponse**](MessageResponse.md) |  | [optional] 
+**objects** | [**list[Webhook]**](Webhook.md) |  | [optional] 
+**meta** | [**ArrayMetaResponse**](ArrayMetaResponse.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

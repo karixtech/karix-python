@@ -1,6 +1,6 @@
-# cpaas.WebhookApi
+# karix.WebhookApi
 
-All URIs are relative to *https://api.mgageindia.com*
+All URIs are relative to *https://api.karix.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -18,24 +18,25 @@ Create webhooks to receive Message
 
 To receive messages you will need to setup a webhook. A webhook is then attached to your phone number.
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
-import cpaas
-from cpaas.rest import ApiException
+import karix
+from karix.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: basicAuth
-cpaas.configuration.username = 'YOUR_USERNAME'
-cpaas.configuration.password = 'YOUR_PASSWORD'
+configuration = karix.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = cpaas.WebhookApi()
+api_instance = karix.WebhookApi(karix.ApiClient(configuration))
 api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
-webhook = cpaas.Webhook() # Webhook | Webhook object (optional)
+webhook = karix.CreateWebhook() # CreateWebhook | Create Webhook object (optional)
 
-try: 
+try:
     # Create webhooks to receive Message
     api_response = api_instance.create_webhook(api_version=api_version, webhook=webhook)
     pprint(api_response)
@@ -48,7 +49,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
- **webhook** | [**Webhook**](Webhook.md)| Webhook object | [optional] 
+ **webhook** | [**CreateWebhook**](CreateWebhook.md)| Create Webhook object | [optional] 
 
 ### Return type
 
@@ -60,39 +61,39 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_webhook_by_id**
-> object delete_webhook_by_id(uid, api_version=api_version)
+> delete_webhook_by_id(uid, api_version=api_version)
 
 Delete a webhook by ID
 
 Delete a webhook by ID
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
-import cpaas
-from cpaas.rest import ApiException
+import karix
+from karix.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: basicAuth
-cpaas.configuration.username = 'YOUR_USERNAME'
-cpaas.configuration.password = 'YOUR_PASSWORD'
+configuration = karix.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = cpaas.WebhookApi()
+api_instance = karix.WebhookApi(karix.ApiClient(configuration))
 uid = 'uid_example' # str | Alphanumeric ID of the webhook to be deleted.
 api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
 
-try: 
+try:
     # Delete a webhook by ID
-    api_response = api_instance.delete_webhook_by_id(uid, api_version=api_version)
-    pprint(api_response)
+    api_instance.delete_webhook_by_id(uid, api_version=api_version)
 except ApiException as e:
     print("Exception when calling WebhookApi->delete_webhook_by_id: %s\n" % e)
 ```
@@ -106,7 +107,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+void (empty response body)
 
 ### Authorization
 
@@ -114,37 +115,40 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_webhook**
-> InlineResponse2004 get_webhook(api_version=api_version)
+> InlineResponse2003 get_webhook(api_version=api_version, offset=offset, limit=limit)
 
 Get a list of your webhooks
 
 Get a list of your webhooks
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
-import cpaas
-from cpaas.rest import ApiException
+import karix
+from karix.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: basicAuth
-cpaas.configuration.username = 'YOUR_USERNAME'
-cpaas.configuration.password = 'YOUR_PASSWORD'
+configuration = karix.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = cpaas.WebhookApi()
+api_instance = karix.WebhookApi(karix.ApiClient(configuration))
 api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+offset = 0 # int | The number of items to skip before starting to collect the result set. (optional) (default to 0)
+limit = 10 # int | The numbers of items to return. (optional) (default to 10)
 
-try: 
+try:
     # Get a list of your webhooks
-    api_response = api_instance.get_webhook(api_version=api_version)
+    api_response = api_instance.get_webhook(api_version=api_version, offset=offset, limit=limit)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling WebhookApi->get_webhook: %s\n" % e)
@@ -155,10 +159,12 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional] [default to 0]
+ **limit** | **int**| The numbers of items to return. | [optional] [default to 10]
 
 ### Return type
 
-[**InlineResponse2004**](InlineResponse2004.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -166,36 +172,37 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_webhook_by_id**
-> InlineResponse2005 get_webhook_by_id(uid, api_version=api_version)
+> InlineResponse2011 get_webhook_by_id(uid, api_version=api_version)
 
 Get a webhook by ID
 
 Get a webhook by ID
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
-import cpaas
-from cpaas.rest import ApiException
+import karix
+from karix.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: basicAuth
-cpaas.configuration.username = 'YOUR_USERNAME'
-cpaas.configuration.password = 'YOUR_PASSWORD'
+configuration = karix.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = cpaas.WebhookApi()
+api_instance = karix.WebhookApi(karix.ApiClient(configuration))
 uid = 'uid_example' # str | Alphanumeric ID of the webhook to get.
 api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
 
-try: 
+try:
     # Get a webhook by ID
     api_response = api_instance.get_webhook_by_id(uid, api_version=api_version)
     pprint(api_response)
@@ -212,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**InlineResponse2011**](InlineResponse2011.md)
 
 ### Authorization
 
@@ -220,37 +227,38 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_webhook**
-> InlineResponse2005 patch_webhook(uid, api_version=api_version, webhook=webhook)
+> InlineResponse2011 patch_webhook(uid, api_version=api_version, webhook=webhook)
 
 Edit a webhook
 
 Edit a webhook
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
-import cpaas
-from cpaas.rest import ApiException
+import karix
+from karix.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: basicAuth
-cpaas.configuration.username = 'YOUR_USERNAME'
-cpaas.configuration.password = 'YOUR_PASSWORD'
+configuration = karix.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = cpaas.WebhookApi()
+api_instance = karix.WebhookApi(karix.ApiClient(configuration))
 uid = 'uid_example' # str | Alphanumeric ID of the webhook to edit.
 api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
-webhook = cpaas.Webhook() # Webhook | Webhook object (optional)
+webhook = karix.EditWebhook() # EditWebhook | Webhook object (optional)
 
-try: 
+try:
     # Edit a webhook
     api_response = api_instance.patch_webhook(uid, api_version=api_version, webhook=webhook)
     pprint(api_response)
@@ -264,11 +272,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uid** | **str**| Alphanumeric ID of the webhook to edit. | 
  **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
- **webhook** | [**Webhook**](Webhook.md)| Webhook object | [optional] 
+ **webhook** | [**EditWebhook**](EditWebhook.md)| Webhook object | [optional] 
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**InlineResponse2011**](InlineResponse2011.md)
 
 ### Authorization
 
@@ -276,8 +284,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
