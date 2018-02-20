@@ -16,7 +16,6 @@ import re  # noqa: F401
 
 import six
 
-from karix.models.big_decimal import BigDecimal  # noqa: F401,E501
 from karix.models.meta_response import MetaResponse  # noqa: F401,E501
 
 
@@ -35,8 +34,8 @@ class MetaResponseWithBalance(object):
     """
     swagger_types = {
         'request_uuid': 'str',
-        'credits_charged': 'BigDecimal',
-        'available_credits': 'BigDecimal'
+        'credits_charged': 'str',
+        'available_credits': 'str'
     }
 
     attribute_map = {
@@ -89,7 +88,7 @@ class MetaResponseWithBalance(object):
 
 
         :return: The credits_charged of this MetaResponseWithBalance.  # noqa: E501
-        :rtype: BigDecimal
+        :rtype: str
         """
         return self._credits_charged
 
@@ -99,7 +98,7 @@ class MetaResponseWithBalance(object):
 
 
         :param credits_charged: The credits_charged of this MetaResponseWithBalance.  # noqa: E501
-        :type: BigDecimal
+        :type: str
         """
 
         self._credits_charged = credits_charged
@@ -110,7 +109,7 @@ class MetaResponseWithBalance(object):
 
 
         :return: The available_credits of this MetaResponseWithBalance.  # noqa: E501
-        :rtype: BigDecimal
+        :rtype: str
         """
         return self._available_credits
 
@@ -120,7 +119,7 @@ class MetaResponseWithBalance(object):
 
 
         :param available_credits: The available_credits of this MetaResponseWithBalance.  # noqa: E501
-        :type: BigDecimal
+        :type: str
         """
 
         self._available_credits = available_credits

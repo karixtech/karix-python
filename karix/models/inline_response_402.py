@@ -16,7 +16,7 @@ import re  # noqa: F401
 
 import six
 
-from karix.models.inline_response402_error import InlineResponse402Error  # noqa: F401,E501
+from karix.models.inline_response_402_error import InlineResponse402Error  # noqa: F401,E501
 from karix.models.meta_response import MetaResponse  # noqa: F401,E501
 
 

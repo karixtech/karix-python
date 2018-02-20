@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **created_time** | **datetime** | Date when this account was created | [optional] 
 **updated_time** | **datetime** | Date when this account was last updated | [optional] 
 **account_type** | **str** | Signifies whether the account is prepaid, postpaid or trial  | [optional] 
-**credit_balance** | [**BigDecimal**](BigDecimal.md) | Account&#39;s credit balance in US dollars.   - For postpaid accounts this value will be &#x60;null&#x60;.   - For subaccounts this value will reflect balance of parent account  | [optional] 
+**credit_balance** | **str** | Account&#39;s credit balance in US dollars.   - For postpaid accounts this value will be &#x60;null&#x60;.   - For subaccounts this value will reflect balance of parent account  | [optional] 
 **auto_recharge** | **bool** | Whether auto-recharge has been enabled.  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

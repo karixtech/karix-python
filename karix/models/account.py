@@ -16,7 +16,6 @@ import re  # noqa: F401
 
 import six
 
-from karix.models.big_decimal import BigDecimal  # noqa: F401,E501
 from karix.models.edit_account import EditAccount  # noqa: F401,E501
 
 
@@ -42,7 +41,7 @@ class Account(object):
         'created_time': 'datetime',
         'updated_time': 'datetime',
         'account_type': 'str',
-        'credit_balance': 'BigDecimal',
+        'credit_balance': 'str',
         'auto_recharge': 'bool'
     }
 
@@ -300,7 +299,7 @@ class Account(object):
         Account's credit balance in US dollars.   - For postpaid accounts this value will be `null`.   - For subaccounts this value will reflect balance of parent account   # noqa: E501
 
         :return: The credit_balance of this Account.  # noqa: E501
-        :rtype: BigDecimal
+        :rtype: str
         """
         return self._credit_balance
 
@@ -311,7 +310,7 @@ class Account(object):
         Account's credit balance in US dollars.   - For postpaid accounts this value will be `null`.   - For subaccounts this value will reflect balance of parent account   # noqa: E501
 
         :param credit_balance: The credit_balance of this Account.  # noqa: E501
-        :type: BigDecimal
+        :type: str
         """
 
         self._credit_balance = credit_balance

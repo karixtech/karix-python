@@ -16,7 +16,6 @@ import re  # noqa: F401
 
 import six
 
-from karix.models.big_decimal import BigDecimal  # noqa: F401,E501
 from karix.models.message_error import MessageError  # noqa: F401,E501
 
 
@@ -45,8 +44,8 @@ class Message(object):
         'updated_time': 'datetime',
         'direction': 'str',
         'error': 'MessageError',
-        'rate': 'BigDecimal',
-        'refund': 'BigDecimal',
+        'rate': 'str',
+        'refund': 'str',
         'total_cost': 'str',
         'parts': 'int',
         'message_type': 'str',
@@ -405,7 +404,7 @@ class Message(object):
         Cost per part of this message. Refer to [`text`](#/definitions/Message/properties/text)   # noqa: E501
 
         :return: The rate of this Message.  # noqa: E501
-        :rtype: BigDecimal
+        :rtype: str
         """
         return self._rate
 
@@ -416,7 +415,7 @@ class Message(object):
         Cost per part of this message. Refer to [`text`](#/definitions/Message/properties/text)   # noqa: E501
 
         :param rate: The rate of this Message.  # noqa: E501
-        :type: BigDecimal
+        :type: str
         """
 
         self._rate = rate
@@ -428,7 +427,7 @@ class Message(object):
         In case we are unable to send the message to destination after queueing we will refund the `total_cost` you were charged. `null` if there was no refund.   # noqa: E501
 
         :return: The refund of this Message.  # noqa: E501
-        :rtype: BigDecimal
+        :rtype: str
         """
         return self._refund
 
@@ -439,7 +438,7 @@ class Message(object):
         In case we are unable to send the message to destination after queueing we will refund the `total_cost` you were charged. `null` if there was no refund.   # noqa: E501
 
         :param refund: The refund of this Message.  # noqa: E501
-        :type: BigDecimal
+        :type: str
         """
 
         self._refund = refund
