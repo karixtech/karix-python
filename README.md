@@ -50,19 +50,21 @@ from __future__ import print_function
 import time
 import karix
 from karix.rest import ApiException
+from karix.configuration import Configuration
+from karix.api_client import ApiClient
 from pprint import pprint
 
 # Configure HTTP basic authorization: basicAuth
-karix.configuration.username = 'YOUR_USERNAME'
-karix.configuration.password = 'YOUR_PASSWORD'
+config = Configuration()
+config.username = 'YOUR_USERNAME'
+config.password = 'YOUR_PASSWORD'
 # create an instance of the API class
-api_instance = karix.AccountsApi()
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
-subaccount = karix.CreateAccount() # CreateAccount | Subaccount object (optional)
+api_instance = karix.AccountsApi(api_client=ApiClient(configuration=config))
+subaccount = karix.CreateAccount(name="my subaccount") # CreateAccount | Subaccount object (optional)
 
 try:
     # Create a new subaccount
-    api_response = api_instance.create_subaccount(api_version=api_version, subaccount=subaccount)
+    api_response = api_instance.create_subaccount(subaccount=subaccount)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AccountsApi->create_subaccount: %s\n" % e)
