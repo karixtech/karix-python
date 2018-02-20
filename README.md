@@ -59,16 +59,14 @@ config = Configuration()
 config.username = 'YOUR_USERNAME'
 config.password = 'YOUR_PASSWORD'
 # create an instance of the API class
-api_instance = karix.AccountsApi(api_client=ApiClient(configuration=config))
-subaccount = karix.CreateAccount(name="my subaccount") # CreateAccount | Subaccount object (optional)
+api_instance = karix.MessageApi(api_client=ApiClient(configuration=config))
+message = karix.CreateMessage(source="<source>", destination=["<destination>"], text="Sent from python SDK")
 
 try:
-    # Create a new subaccount
-    api_response = api_instance.create_subaccount(subaccount=subaccount)
+    api_response = api_instance.send_message(message=message)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AccountsApi->create_subaccount: %s\n" % e)
-
+    print("Exception when calling MessageApi->send_message: %s\n" % e)
 ```
 
 ## Documentation for API Endpoints
