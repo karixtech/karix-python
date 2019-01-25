@@ -56,8 +56,8 @@ from pprint import pprint
 
 # Configure HTTP basic authorization: basicAuth
 config = Configuration()
-config.username = 'YOUR_USERNAME'
-config.password = 'YOUR_PASSWORD'
+config.username = 'YOUR_AUTH_ID'
+config.password = 'YOUR_AUTH_TOKEN'
 # create an instance of the API class
 api_instance = karix.MessageApi(api_client=ApiClient(configuration=config))
 message = karix.CreateMessage(source="<source>", destination=["<destination>"], text="Sent from python SDK")
