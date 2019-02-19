@@ -204,6 +204,9 @@ class AccountNumber(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(AccountNumber, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

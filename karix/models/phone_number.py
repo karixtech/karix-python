@@ -199,6 +199,9 @@ class PhoneNumber(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(PhoneNumber, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

@@ -142,6 +142,9 @@ class RentNumber(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(RentNumber, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

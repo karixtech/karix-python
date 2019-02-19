@@ -93,6 +93,9 @@ class ObjectMetaResponse(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(ObjectMetaResponse, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

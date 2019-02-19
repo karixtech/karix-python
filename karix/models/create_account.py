@@ -128,6 +128,9 @@ class CreateAccount(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(CreateAccount, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

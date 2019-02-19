@@ -38,11 +38,11 @@ class AccountsApi(object):
 
         Create a new subaccount under your account  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_subaccount(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_subaccount(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param CreateAccount subaccount: Subaccount object
         :return: InlineResponse201
@@ -50,7 +50,7 @@ class AccountsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_subaccount_with_http_info(**kwargs)  # noqa: E501
         else:
             (data) = self.create_subaccount_with_http_info(**kwargs)  # noqa: E501
@@ -61,11 +61,11 @@ class AccountsApi(object):
 
         Create a new subaccount under your account  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_subaccount_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_subaccount_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param CreateAccount subaccount: Subaccount object
         :return: InlineResponse201
@@ -74,7 +74,7 @@ class AccountsApi(object):
         """
 
         all_params = ['api_version', 'subaccount']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -126,7 +126,7 @@ class AccountsApi(object):
             files=local_var_files,
             response_type='InlineResponse201',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -137,11 +137,11 @@ class AccountsApi(object):
 
         Get a list of details of all subaccounts, including the main account. Accounts are sorted by last updated time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_subaccount(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_subaccount(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param int offset: The number of items to skip before starting to collect the result set.
         :param int limit: The numbers of items to return.
@@ -150,7 +150,7 @@ class AccountsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_subaccount_with_http_info(**kwargs)  # noqa: E501
         else:
             (data) = self.get_subaccount_with_http_info(**kwargs)  # noqa: E501
@@ -161,11 +161,11 @@ class AccountsApi(object):
 
         Get a list of details of all subaccounts, including the main account. Accounts are sorted by last updated time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_subaccount_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_subaccount_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param int offset: The number of items to skip before starting to collect the result set.
         :param int limit: The numbers of items to return.
@@ -175,7 +175,7 @@ class AccountsApi(object):
         """
 
         all_params = ['api_version', 'offset', 'limit']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -229,7 +229,7 @@ class AccountsApi(object):
             files=local_var_files,
             response_type='InlineResponse200',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -240,11 +240,11 @@ class AccountsApi(object):
 
         Get details of an account by its uid. Both main account and subaccounts can be fetched using their uids.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_subaccount_by_id(uid, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_subaccount_by_id(uid, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str uid: Alphanumeric ID of the subaccount to get. (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :return: InlineResponse201
@@ -252,7 +252,7 @@ class AccountsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_subaccount_by_id_with_http_info(uid, **kwargs)  # noqa: E501
         else:
             (data) = self.get_subaccount_by_id_with_http_info(uid, **kwargs)  # noqa: E501
@@ -263,11 +263,11 @@ class AccountsApi(object):
 
         Get details of an account by its uid. Both main account and subaccounts can be fetched using their uids.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_subaccount_by_id_with_http_info(uid, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_subaccount_by_id_with_http_info(uid, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str uid: Alphanumeric ID of the subaccount to get. (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :return: InlineResponse201
@@ -276,7 +276,7 @@ class AccountsApi(object):
         """
 
         all_params = ['uid', 'api_version']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -332,7 +332,7 @@ class AccountsApi(object):
             files=local_var_files,
             response_type='InlineResponse201',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -343,11 +343,11 @@ class AccountsApi(object):
 
         Edit details of your account or its subaccount   - An account can only change the status of subaccounts under it.     It cant change its own status   - A parent account can edit its own details and the details of its subaccounts   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_subaccount(uid, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_subaccount(uid, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str uid: Alphanumeric ID of the account/subaccount to edit. (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param EditAccount subaccount: Subaccount object
@@ -356,7 +356,7 @@ class AccountsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_subaccount_with_http_info(uid, **kwargs)  # noqa: E501
         else:
             (data) = self.patch_subaccount_with_http_info(uid, **kwargs)  # noqa: E501
@@ -367,11 +367,11 @@ class AccountsApi(object):
 
         Edit details of your account or its subaccount   - An account can only change the status of subaccounts under it.     It cant change its own status   - A parent account can edit its own details and the details of its subaccounts   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_subaccount_with_http_info(uid, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_subaccount_with_http_info(uid, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str uid: Alphanumeric ID of the account/subaccount to edit. (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param EditAccount subaccount: Subaccount object
@@ -381,7 +381,7 @@ class AccountsApi(object):
         """
 
         all_params = ['uid', 'api_version', 'subaccount']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -439,7 +439,7 @@ class AccountsApi(object):
             files=local_var_files,
             response_type='InlineResponse201',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),

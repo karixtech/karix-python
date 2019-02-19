@@ -127,6 +127,9 @@ class EditAccount(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(EditAccount, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

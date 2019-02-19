@@ -38,11 +38,11 @@ class MessageApi(object):
 
         Get list of messages sent or received. Sorted by descending order of `queued_time` (latest messages are first)   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_message(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_message(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param str direction: Message direction, inbound or outbound to filter on. If not provided, the filter is not applied. 
         :param str account_uid: Filter the result list by the account which sent the message - If not provided or `null` or empty string, no filter will be placed   and all the messages by the main account and its subaccounts are returned - To get the list of messages sent by main account only, set `account_uid`   to main account's uid. 
@@ -54,7 +54,7 @@ class MessageApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_message_with_http_info(**kwargs)  # noqa: E501
         else:
             (data) = self.get_message_with_http_info(**kwargs)  # noqa: E501
@@ -65,11 +65,11 @@ class MessageApi(object):
 
         Get list of messages sent or received. Sorted by descending order of `queued_time` (latest messages are first)   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_message_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_message_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param str direction: Message direction, inbound or outbound to filter on. If not provided, the filter is not applied. 
         :param str account_uid: Filter the result list by the account which sent the message - If not provided or `null` or empty string, no filter will be placed   and all the messages by the main account and its subaccounts are returned - To get the list of messages sent by main account only, set `account_uid`   to main account's uid. 
@@ -82,7 +82,7 @@ class MessageApi(object):
         """
 
         all_params = ['api_version', 'direction', 'account_uid', 'state', 'offset', 'limit']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -142,7 +142,7 @@ class MessageApi(object):
             files=local_var_files,
             response_type='InlineResponse2001',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -153,11 +153,11 @@ class MessageApi(object):
 
         Get message details by id.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_message_by_id(uid, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_message_by_id(uid, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str uid: Alphanumeric ID of the message to get. (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :return: InlineResponse2002
@@ -165,7 +165,7 @@ class MessageApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_message_by_id_with_http_info(uid, **kwargs)  # noqa: E501
         else:
             (data) = self.get_message_by_id_with_http_info(uid, **kwargs)  # noqa: E501
@@ -176,11 +176,11 @@ class MessageApi(object):
 
         Get message details by id.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_message_by_id_with_http_info(uid, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_message_by_id_with_http_info(uid, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str uid: Alphanumeric ID of the message to get. (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :return: InlineResponse2002
@@ -189,7 +189,7 @@ class MessageApi(object):
         """
 
         all_params = ['uid', 'api_version']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -245,7 +245,7 @@ class MessageApi(object):
             files=local_var_files,
             response_type='InlineResponse2002',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -256,11 +256,11 @@ class MessageApi(object):
 
         Send a message to a list of destinations.   - A successful `202` response means that a message record has been created in Karix.     It does not mean that each message was successfully `queued`, `sent` or `delivered`.   - To know the status of the message check the parameter `status` of the message record.   - Message records might be created with a `failed` state due issues with Karix or     validation issues. Please check `error` to know the reason of the failure.     No balance is deducted and `total_cost` is always zero for such cases.   - Message records might be updated to state `undelivered`. This is due to carrier/operator     related issues. Please check `error` to know the reason of the failure.     Balance is still deducted for such cases.   - Since this is a bulk API the response structure follows the List Response format     rather than the Single Response format.   - Once queued, the messages for your account are dequeued and processed at a     rate set for your account (defaults to 5 messages per second).     Contact [sales](support@karix.io) to get your rate limit increased.   - For fair usage, there is no rate limiting for queueing messages using this     API. Dequeue rate would still be applicable as stated.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.send_message(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.send_message(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param CreateMessage message: Create Message object
         :return: InlineResponse202
@@ -268,7 +268,7 @@ class MessageApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.send_message_with_http_info(**kwargs)  # noqa: E501
         else:
             (data) = self.send_message_with_http_info(**kwargs)  # noqa: E501
@@ -279,11 +279,11 @@ class MessageApi(object):
 
         Send a message to a list of destinations.   - A successful `202` response means that a message record has been created in Karix.     It does not mean that each message was successfully `queued`, `sent` or `delivered`.   - To know the status of the message check the parameter `status` of the message record.   - Message records might be created with a `failed` state due issues with Karix or     validation issues. Please check `error` to know the reason of the failure.     No balance is deducted and `total_cost` is always zero for such cases.   - Message records might be updated to state `undelivered`. This is due to carrier/operator     related issues. Please check `error` to know the reason of the failure.     Balance is still deducted for such cases.   - Since this is a bulk API the response structure follows the List Response format     rather than the Single Response format.   - Once queued, the messages for your account are dequeued and processed at a     rate set for your account (defaults to 5 messages per second).     Contact [sales](support@karix.io) to get your rate limit increased.   - For fair usage, there is no rate limiting for queueing messages using this     API. Dequeue rate would still be applicable as stated.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.send_message_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.send_message_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param CreateMessage message: Create Message object
         :return: InlineResponse202
@@ -292,7 +292,7 @@ class MessageApi(object):
         """
 
         all_params = ['api_version', 'message']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -344,7 +344,7 @@ class MessageApi(object):
             files=local_var_files,
             response_type='InlineResponse202',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),

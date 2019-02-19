@@ -91,6 +91,9 @@ class PhoneNumberRegion(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(PhoneNumberRegion, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

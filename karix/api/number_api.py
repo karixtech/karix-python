@@ -38,11 +38,11 @@ class NumberApi(object):
 
         Get details of all phone numbers linked to your account.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_number(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_number(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param int offset: The number of items to skip before starting to collect the result set.
         :param int limit: The numbers of items to return.
@@ -54,7 +54,7 @@ class NumberApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_number_with_http_info(**kwargs)  # noqa: E501
         else:
             (data) = self.get_number_with_http_info(**kwargs)  # noqa: E501
@@ -65,11 +65,11 @@ class NumberApi(object):
 
         Get details of all phone numbers linked to your account.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_number_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_number_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param int offset: The number of items to skip before starting to collect the result set.
         :param int limit: The numbers of items to return.
@@ -82,7 +82,7 @@ class NumberApi(object):
         """
 
         all_params = ['api_version', 'offset', 'limit', 'country', 'contains', 'number_type']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -143,7 +143,7 @@ class NumberApi(object):
             files=local_var_files,
             response_type='InlineResponse2004',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -154,11 +154,11 @@ class NumberApi(object):
 
         Unrent number from your account  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.number_num_delete(num, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.number_num_delete(num, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param int num: Number which needs to be unrented (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :return: None
@@ -166,7 +166,7 @@ class NumberApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.number_num_delete_with_http_info(num, **kwargs)  # noqa: E501
         else:
             (data) = self.number_num_delete_with_http_info(num, **kwargs)  # noqa: E501
@@ -177,11 +177,11 @@ class NumberApi(object):
 
         Unrent number from your account  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.number_num_delete_with_http_info(num, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.number_num_delete_with_http_info(num, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param int num: Number which needs to be unrented (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :return: None
@@ -190,7 +190,7 @@ class NumberApi(object):
         """
 
         all_params = ['num', 'api_version']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -246,7 +246,7 @@ class NumberApi(object):
             files=local_var_files,
             response_type=None,  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -257,11 +257,11 @@ class NumberApi(object):
 
         Get details of a number  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.number_num_get(num, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.number_num_get(num, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param int num: Number for which details need to be fetched (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :return: InlineResponse2005
@@ -269,7 +269,7 @@ class NumberApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.number_num_get_with_http_info(num, **kwargs)  # noqa: E501
         else:
             (data) = self.number_num_get_with_http_info(num, **kwargs)  # noqa: E501
@@ -280,11 +280,11 @@ class NumberApi(object):
 
         Get details of a number  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.number_num_get_with_http_info(num, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.number_num_get_with_http_info(num, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param int num: Number for which details need to be fetched (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :return: InlineResponse2005
@@ -293,7 +293,7 @@ class NumberApi(object):
         """
 
         all_params = ['num', 'api_version']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -349,7 +349,7 @@ class NumberApi(object):
             files=local_var_files,
             response_type='InlineResponse2005',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -360,11 +360,11 @@ class NumberApi(object):
 
         Edit phone number belonging to your account  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.number_num_patch(num, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.number_num_patch(num, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param int num: Number which needs to be edited (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param EditAccountNumber number: Account Number object
@@ -373,7 +373,7 @@ class NumberApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.number_num_patch_with_http_info(num, **kwargs)  # noqa: E501
         else:
             (data) = self.number_num_patch_with_http_info(num, **kwargs)  # noqa: E501
@@ -384,11 +384,11 @@ class NumberApi(object):
 
         Edit phone number belonging to your account  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.number_num_patch_with_http_info(num, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.number_num_patch_with_http_info(num, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param int num: Number which needs to be edited (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :param EditAccountNumber number: Account Number object
@@ -398,7 +398,7 @@ class NumberApi(object):
         """
 
         all_params = ['num', 'api_version', 'number']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -456,7 +456,7 @@ class NumberApi(object):
             files=local_var_files,
             response_type='InlineResponse2005',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -467,11 +467,11 @@ class NumberApi(object):
 
         Rent a phone number. Refer to Number Search API to find available phone numbers   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.rent_number(number, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.rent_number(number, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param RentNumber number: Rent Details object (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :return: InlineResponse2012
@@ -479,7 +479,7 @@ class NumberApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.rent_number_with_http_info(number, **kwargs)  # noqa: E501
         else:
             (data) = self.rent_number_with_http_info(number, **kwargs)  # noqa: E501
@@ -490,11 +490,11 @@ class NumberApi(object):
 
         Rent a phone number. Refer to Number Search API to find available phone numbers   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.rent_number_with_http_info(number, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.rent_number_with_http_info(number, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param RentNumber number: Rent Details object (required)
         :param str api_version: API Version. If not specified your pinned verison is used.
         :return: InlineResponse2012
@@ -503,7 +503,7 @@ class NumberApi(object):
         """
 
         all_params = ['number', 'api_version']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -559,7 +559,7 @@ class NumberApi(object):
             files=local_var_files,
             response_type='InlineResponse2012',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),

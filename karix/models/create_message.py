@@ -68,7 +68,7 @@ class CreateMessage(object):
     def source(self):
         """Gets the source of this CreateMessage.  # noqa: E501
 
-        Sender ID for the message which will be displayed to the receiver. It should specification E.164 with international calling codes but without the `+` in front.   - When sending a message to US/Canada, the Sender ID must be a number     which belongs to your Karix Subaccount (or main account).   # noqa: E501
+        Sender ID for the message which will be displayed to the receiver. It should specification E.164 with international calling codes.   - When sending a message to US/Canada, the Sender ID must be a number     which belongs to your Karix Subaccount (or main account).   # noqa: E501
 
         :return: The source of this CreateMessage.  # noqa: E501
         :rtype: str
@@ -79,7 +79,7 @@ class CreateMessage(object):
     def source(self, source):
         """Sets the source of this CreateMessage.
 
-        Sender ID for the message which will be displayed to the receiver. It should specification E.164 with international calling codes but without the `+` in front.   - When sending a message to US/Canada, the Sender ID must be a number     which belongs to your Karix Subaccount (or main account).   # noqa: E501
+        Sender ID for the message which will be displayed to the receiver. It should specification E.164 with international calling codes.   - When sending a message to US/Canada, the Sender ID must be a number     which belongs to your Karix Subaccount (or main account).   # noqa: E501
 
         :param source: The source of this CreateMessage.  # noqa: E501
         :type: str
@@ -212,6 +212,9 @@ class CreateMessage(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(CreateMessage, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

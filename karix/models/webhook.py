@@ -317,6 +317,9 @@ class Webhook(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(Webhook, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 
