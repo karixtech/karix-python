@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_message**](MessageApi.md#get_message) | **GET** /message/ | Get list of messages sent or received
 [**get_message_by_id**](MessageApi.md#get_message_by_id) | **GET** /message/{uid}/ | Get message details by id.
-[**send_message**](MessageApi.md#send_message) | **POST** /message/ | Send a message to a list of phone numbers
+[**send_message**](MessageApi.md#send_message) | **POST** /message/ | Send a message to a list of destinations
 
 
 # **get_message**
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 Get list of messages sent or received
 
-Get list of messages sent or received. Sorted by descending order of `queued_time` (latest messages are first) 
+Get list of messages sent or received. Sorted by descending order of `created_time` (latest messages are first) 
 
 ### Example
 ```python
@@ -31,7 +31,7 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = karix.MessageApi(karix.ApiClient(configuration))
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 direction = 'direction_example' # str | Message direction, inbound or outbound to filter on. If not provided, the filter is not applied.  (optional)
 account_uid = 'account_uid_example' # str | Filter the result list by the account which sent the message - If not provided or `null` or empty string, no filter will be placed   and all the messages by the main account and its subaccounts are returned - To get the list of messages sent by main account only, set `account_uid`   to main account's uid.  (optional)
 state = 'state_example' # str | Filter the result on the basis of message state.  (optional)
@@ -50,7 +50,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
  **direction** | **str**| Message direction, inbound or outbound to filter on. If not provided, the filter is not applied.  | [optional] 
  **account_uid** | **str**| Filter the result list by the account which sent the message - If not provided or &#x60;null&#x60; or empty string, no filter will be placed   and all the messages by the main account and its subaccounts are returned - To get the list of messages sent by main account only, set &#x60;account_uid&#x60;   to main account&#39;s uid.  | [optional] 
  **state** | **str**| Filter the result on the basis of message state.  | [optional] 
@@ -95,7 +95,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = karix.MessageApi(karix.ApiClient(configuration))
 uid = 'uid_example' # str | Alphanumeric ID of the message to get.
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 
 try:
     # Get message details by id.
@@ -110,7 +110,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uid** | **str**| Alphanumeric ID of the message to get. | 
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
 
 ### Return type
 
@@ -130,9 +130,9 @@ Name | Type | Description  | Notes
 # **send_message**
 > InlineResponse202 send_message(api_version=api_version, message=message)
 
-Send a message to a list of phone numbers
+Send a message to a list of destinations
 
-Send a message to a list of destinations.   - A successful `202` response means that a message record has been created in Karix.     It does not mean that each message was successfully `queued`, `sent` or `delivered`.   - To know the status of the message check the parameter `status` of the message record.   - Message records might be created with a `failed` state due issues with Karix or     validation issues. Please check `error` to know the reason of the failure.     No balance is deducted and `total_cost` is always zero for such cases.   - Message records might be updated to state `undelivered`. This is due to carrier/operator     related issues. Please check `error` to know the reason of the failure.     Balance is still deducted for such cases.   - Since this is a bulk API the response structure follows the List Response format     rather than the Single Response format.   - Once queued, the messages for your account are dequeued and processed at a     rate set for your account (defaults to 5 messages per second).     Contact [sales](support@karix.io) to get your rate limit increased.   - For fair usage, there is no rate limiting for queueing messages using this     API. Dequeue rate would still be applicable as stated. 
+Send a message to a list of destinations.   - A successful `202` response means that a message record has been created in Karix.     It does not mean that each message was successfully `queued`, `sent` or `delivered`.   - To know the status of the message check the parameter `status` of the message record.   - Message records might be created with a `failed` state due issues with Karix platform or     validation issues. Please check `error_code` to know the reason of the failure.     No balance is deducted and `total_cost` is always zero for such cases.   - Message records might be updated to state `undelivered`. This is due to carrier/operator     related issues. Please check `error_code` to know the reason of the failure.     Balance is still deducted for such cases.   - Since this is a bulk API the response structure follows the List Response format     rather than the Single Response format.   - Once queued, the messages for your account are dequeued and processed at a     rate set for your account (defaults to 5 messages per second).     Contact [sales](mailto:support@karix.io) to get your rate limit increased.   - For fair usage, there is no rate limiting for queueing messages using this     API. Dequeue rate would still be applicable as stated. 
 
 ### Example
 ```python
@@ -149,11 +149,11 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = karix.MessageApi(karix.ApiClient(configuration))
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 message = karix.CreateMessage() # CreateMessage | Create Message object (optional)
 
 try:
-    # Send a message to a list of phone numbers
+    # Send a message to a list of destinations
     api_response = api_instance.send_message(api_version=api_version, message=message)
     pprint(api_response)
 except ApiException as e:
@@ -164,7 +164,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
  **message** | [**CreateMessage**](CreateMessage.md)| Create Message object | [optional] 
 
 ### Return type

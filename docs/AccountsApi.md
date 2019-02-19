@@ -32,7 +32,7 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = karix.AccountsApi(karix.ApiClient(configuration))
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 subaccount = karix.CreateAccount() # CreateAccount | Subaccount object (optional)
 
 try:
@@ -47,7 +47,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
  **subaccount** | [**CreateAccount**](CreateAccount.md)| Subaccount object | [optional] 
 
 ### Return type
@@ -87,7 +87,7 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = karix.AccountsApi(karix.ApiClient(configuration))
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 offset = 0 # int | The number of items to skip before starting to collect the result set. (optional) (default to 0)
 limit = 10 # int | The numbers of items to return. (optional) (default to 10)
 
@@ -103,7 +103,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional] [default to 0]
  **limit** | **int**| The numbers of items to return. | [optional] [default to 10]
 
@@ -145,7 +145,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = karix.AccountsApi(karix.ApiClient(configuration))
 uid = 'uid_example' # str | Alphanumeric ID of the subaccount to get.
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 
 try:
     # Get details of an account
@@ -160,7 +160,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uid** | **str**| Alphanumeric ID of the subaccount to get. | 
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
 
 ### Return type
 
@@ -200,7 +200,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = karix.AccountsApi(karix.ApiClient(configuration))
 uid = 'uid_example' # str | Alphanumeric ID of the account/subaccount to edit.
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 subaccount = karix.EditAccount() # EditAccount | Subaccount object (optional)
 
 try:
@@ -216,7 +216,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uid** | **str**| Alphanumeric ID of the account/subaccount to edit. | 
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
  **subaccount** | [**EditAccount**](EditAccount.md)| Subaccount object | [optional] 
 
 ### Return type

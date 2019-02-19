@@ -33,7 +33,7 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = karix.WebhookApi(karix.ApiClient(configuration))
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 webhook = karix.CreateWebhook() # CreateWebhook | Create Webhook object (optional)
 
 try:
@@ -48,7 +48,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
  **webhook** | [**CreateWebhook**](CreateWebhook.md)| Create Webhook object | [optional] 
 
 ### Return type
@@ -89,7 +89,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = karix.WebhookApi(karix.ApiClient(configuration))
 uid = 'uid_example' # str | Alphanumeric ID of the webhook to be deleted.
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 
 try:
     # Delete a webhook by ID
@@ -103,7 +103,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uid** | **str**| Alphanumeric ID of the webhook to be deleted. | 
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
 
 ### Return type
 
@@ -142,7 +142,7 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = karix.WebhookApi(karix.ApiClient(configuration))
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 offset = 0 # int | The number of items to skip before starting to collect the result set. (optional) (default to 0)
 limit = 10 # int | The numbers of items to return. (optional) (default to 10)
 
@@ -158,7 +158,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional] [default to 0]
  **limit** | **int**| The numbers of items to return. | [optional] [default to 10]
 
@@ -200,7 +200,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = karix.WebhookApi(karix.ApiClient(configuration))
 uid = 'uid_example' # str | Alphanumeric ID of the webhook to get.
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 
 try:
     # Get a webhook by ID
@@ -215,7 +215,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uid** | **str**| Alphanumeric ID of the webhook to get. | 
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
 
 ### Return type
 
@@ -255,7 +255,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = karix.WebhookApi(karix.ApiClient(configuration))
 uid = 'uid_example' # str | Alphanumeric ID of the webhook to edit.
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 webhook = karix.EditWebhook() # EditWebhook | Webhook object (optional)
 
 try:
@@ -271,7 +271,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uid** | **str**| Alphanumeric ID of the webhook to edit. | 
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
  **webhook** | [**EditWebhook**](EditWebhook.md)| Webhook object | [optional] 
 
 ### Return type

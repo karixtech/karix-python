@@ -3,9 +3,9 @@
 """
     karix api
 
-    # Overview  Karix API lets you interact with the Karix platform. It allows you to query your account, set up webhooks, send messages and buy phone numbers.  # API and Clients Versioning  Karix APIs are versioned using the format vX.Y where X is the major version number and Y is minor. All minor version changes are backwards compatible but major releases are not. Please be careful when upgrading.  A new user account is pinned to the latest version at the time of first request. By default every request sent Karix is processed using that version, even if there have been subsequent breaking changes. This is done to prevent existing user applications from breaking. You can change the pinned version for your account using the account dashboard. The default API version can be overridden by specifying the header `api-version`. Note: Specifying this value will not change your pinned version for other calls.  Karix also provides HTTP API clients for all major languages. Release versions of these clients correspond to their API Version supported. Client version vX.Y.Z supports API version vX.Y. HTTP Clients are configured to use `api-version` header for that client version. When using official Karix HTTP Clients only, you dont need to concern yourself with pinned version. To upgrade your API version simply update the client.  # Common Request Structures  All Karix APIs follow a common REST format with the following resources:   - account   - message   - webhook   - number  ## Creating a resource To create a resource send a `POST` request with the desired parameters in a JSON object to `/<resource>/` url. A successful response will contain the details of the single resource created with HTTP status code `201 Created`. Note: An exception to this is the `Create Message` API which is a bulk API and returns       a list of message records.  ## Fetching a resource To fetch a resource by its Unique ID send a `GET` request to `/<resource>/<uid>/` where `uid` is the Alphanumeric Unique ID of the resource. A successful response will contain the details of the single resource fetched with HTTP status code `200 OK`  ## Editing a resource To edit certain parameters of a resource send a `PATCH` request to `/<resource>/<uid>/` where `uid` is the Alphanumeric Unique ID of the resource, with a JSON object containing only the parameters which need to be updated. Edit resource APIs generally have no required parameters. A successful response will contain all the details of the single resource after editing.  ## Deleting a resource To delete a resource send a `DELETE` request to `/<resource>/<uid>/` where `uid` is the Alphanumeric Unique ID of the resource. A successful response will return HTTP status code `204 No Content` with no body.  ## Fetching a list of resources To fetch a list of resources send a `GET` request to `/<resource>/` with filters as GET parameters. A successful response will contain a list of filtered paginated objects with HTTP status code `200 OK`.  ### Pagination Pagination for list APIs are controlled using GET parameters:   - `limit`: Number of objects to be returned   - `offset`: Number of objects to skip before collecting the output list.  # Common Response Structures  All Karix APIs follow some common respose structures.  ## Success Responses  ### Single Resource Response  Responses returning a single object will have the following keys | Key           | Child Key     | Description                               | |:------------- |:------------- |:----------------------------------------- | | meta          |               | Meta Details about request and response   | |               | request_uuid  | Unique request identifier                 | | data          |               | Details of the object                     |  ### List Resource Response  Responses returning a list of objects will have the following keys | Key           | Child Key     | Description                               | |:------------- |:------------- |:----------------------------------------- | | meta          |               | Meta Details about request and response   | |               | request_uuid  | Unique request identifier                 | |               | previous      | Link to the previous page of the list     | |               | next          | Link to the next page of the list         | |               | count         | Total number of objects over all pages    | |               | limit         | Limit the API was requested with          | |               | offset        | Page Offset the API was requested with    | | objects       |               | List of objects with details              |  ## Error Responses  ### Validation Error Response  Responses for requests which failed due to validation errors will have the follwing keys: | Key           | Child Key     | Description                                | |:------------- |:------------- |:------------------------------------------ | | meta          |               | Meta Details about request and response    | |               | request_uuid  | Unique request identifier                  | | error         |               | Details for the error                      | |               | message       | Error message                              | |               | param         | (Optional) parameter this error relates to |  Validation error responses will return HTTP Status Code `400 Bad Request`  ### Insufficient Balance Response  Some requests will require to consume account credits. In case of insufficient balance the following keys will be returned: | Key           | Child Key     | Description                               | |:------------- |:------------- |:----------------------------------------- | | meta          |               | Meta Details about request and response   | |               | request_uuid  | Unique request identifier                 | | error         |               | Details for the error                     | |               | message       | `Insufficient Balance`                    |  Insufficient balance response will return HTTP Status Code `402 Payment Required`   # noqa: E501
+    # Overview  Karix API lets you interact with the Karix platform using an omnichannel messaging API. It also allows you to query your account, set up webhooks and buy phone numbers.  # API and Clients Versioning  Karix APIs are versioned using the format vX.Y where X is the major version number and Y is minor. All minor version releases are backwards compatible but major releases are not, please be careful when upgrading.  Version header `api-version` is used by Karix platform to determine the version of the API request. To use Karix API v2 you can send `api-version` as `\"2.0\"`.  If an API request does not contain `api-version` header then Karix platform uses the pinned API version of the account as the default verison. Your account defaults to the latest API version release at the time of signup. You can check the pinned API version form the [dashboard](https://cloud.karix.io/dashboard).  Karix also provides Helper Libraries for all major languages. Release versions of these libraries correspond to their API Version supported. Client version vX.Y.Z supports API version vX.Y. Helper libraries are configured to send `api-version` header based on the library version. When using official Karix helper libraries, you dont need to concern yourself with pinned version. Using helper library of latest version will give you access to latest features.  # Supported Channels  Karix omnichannel messaging API supports the following channels:   - sms   - whatsapp  ## SMS Channel To send a message to one or more destinations over SMS channel set `channel` to `sms` in the [Messaging API](#operation/sendMessage).  In trial mode, your account can only send messages to numbers within the sandbox.  ## Whatsapp Channel To send a message to a destination over WhatsApp channel set `channel` to `whatsapp` in the [Messaging API](#operation/sendMessage).  Currently WhatsApp channel can only be used from within the sandbox. Contact [support](mailto:support@karix.io) for an early access outside the sandbox.  Any messages you initiate over WhatsApp to end users must conform to a template configured in WhatsApp. These messages are called \"Notification Messages\". Currently only text messages can be sent as Notification Messages.  Any responses you receive from end users and all replies you send within 24 hours of the last received response are called \"Conversation Messages\".  When using the sandbox for testing and development purposes, we have provided for the following pre-approved templates for \"Notification Messages\":    - Your order * has been dispatched. Please expect delivery by *   - OTP requested by you on * is *   - Thank you for your payment of * * on *. Your transaction ID is *  You can replace `*` with any text of your choice.  Both Notification and Conversation messages are priced differently, please refer to the [pricing page](http://karix.io/messaging/pricing/) for more details.  # Common Request Structures  All Karix APIs follow a common REST format with the following resources:   - account   - message   - webhook   - number  ## Creating a resource To create a resource send a `POST` request with the desired parameters in a JSON object to `/<resource>/` url. A successful response will contain the details of the single resource created with HTTP status code `201 Created`. Note: An exception to this is the `Create Message` API which is a bulk API and returns       a list of message records.  ## Fetching a resource To fetch a resource by its Unique ID send a `GET` request to `/<resource>/<uid>/` where `uid` is the Alphanumeric Unique ID of the resource. A successful response will contain the details of the single resource fetched with HTTP status code `200 OK`  ## Editing a resource To edit certain parameters of a resource send a `PATCH` request to `/<resource>/<uid>/` where `uid` is the Alphanumeric Unique ID of the resource, with a JSON object containing only the parameters which need to be updated. Edit resource APIs generally have no required parameters. A successful response will contain all the details of the single resource after editing.  ## Deleting a resource To delete a resource send a `DELETE` request to `/<resource>/<uid>/` where `uid` is the Alphanumeric Unique ID of the resource. A successful response will return HTTP status code `204 No Content` with no body.  ## Fetching a list of resources To fetch a list of resources send a `GET` request to `/<resource>/` with filters as GET parameters. A successful response will contain a list of filtered paginated objects with HTTP status code `200 OK`.  ### Pagination Pagination for list APIs are controlled using GET parameters:   - `limit`: Number of objects to be returned   - `offset`: Number of objects to skip before collecting the output list.  # Common Response Structures  All Karix APIs follow a common respose structure.  ## Success Responses  ### Single Resource Response  Responses returning a single object will have the following keys | Key           | Child Key     | Description                               | |:------------- |:------------- |:----------------------------------------- | | meta          |               | Meta Details about request and response   | |               | request_uuid  | Unique request identifier                 | | data          |               | Details of the object                     |  ### List Resource Response  Responses returning a list of objects will have the following keys | Key           | Child Key     | Description                               | |:------------- |:------------- |:----------------------------------------- | | meta          |               | Meta Details about request and response   | |               | request_uuid  | Unique request identifier                 | |               | previous      | Link to the previous page of the list     | |               | next          | Link to the next page of the list         | |               | total         | Total number of objects over all pages    | | objects       |               | List of objects with details              |  ## Error Responses  ### Validation Error Response  Responses for requests which failed due to validation errors will have the follwing keys: | Key           | Child Key     | Description                                | |:------------- |:------------- |:------------------------------------------ | | meta          |               | Meta Details about request and response    | |               | request_uuid  | Unique request identifier                  | | error         |               | Details for the error                      | |               | message       | Error message                              | |               | param         | (Optional) parameter this error relates to |  Validation error responses will return HTTP Status Code `400 Bad Request`  ### Insufficient Balance Response  Some requests will require to consume account credits. In case of insufficient balance the following keys will be returned: | Key           | Child Key     | Description                               | |:------------- |:------------- |:----------------------------------------- | | meta          |               | Meta Details about request and response   | |               | request_uuid  | Unique request identifier                 | | error         |               | Details for the error                     | |               | message       | `Insufficient Balance`                    |  Insufficient balance response will return HTTP Status Code `402 Payment Required`  # Events and Webhooks  All asynchronous events generated by Karix platform follow a common structure:  | Key           | Child Key     | Description                                 | |:------------- |:------------- |:------------------------------------------- | | uid           |               | Alphanumeric unique ID of the event         | | api_version   |               | 2.0                                         | | type          |               | Type of the event.                          | | data          |               | Details of the object attached to the event |  Currently implemented event types are:   - `message`: These events are generated when a message is created or       its status is changed. When event `type` is `message` the `data`       parameter contains the Message object (check out the response.data of       [Get Message](#operation/getMessageById) API).     - For outbound messages, `message` events are sent to `events_url` parameter of       [Send Message](#operation/sendMessage) API     - For inbound messages, `message` events are sent to the webhook attached       to the phone number resource using [Edit Number](#tag/Number) API     - For inbound messages to whatsapp sandbox, `message` events are sent to       Webhook URL set on the [Dashboard](https://cloud.karix.io/dashboard/#whatsapp-demo).   # noqa: E501
 
-    OpenAPI spec version: 1.0
+    OpenAPI spec version: 2.0
     Contact: support@karix.io
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
@@ -16,6 +16,8 @@ import re  # noqa: F401
 
 import six
 
+from karix.models.message_channel_details import MessageChannelDetails  # noqa: F401,E501
+from karix.models.message_content import MessageContent  # noqa: F401,E501
 from karix.models.message_error import MessageError  # noqa: F401,E501
 
 
@@ -35,104 +37,104 @@ class Message(object):
     swagger_types = {
         'uid': 'str',
         'account_uid': 'str',
+        'total_cost': 'str',
+        'refund': 'str',
         'source': 'str',
         'destination': 'str',
-        'status': 'str',
-        'text': 'str',
-        'queued_time': 'datetime',
+        'country': 'str',
+        'content_type': 'str',
+        'content': 'MessageContent',
+        'created_time': 'datetime',
         'sent_time': 'datetime',
+        'delivered_time': 'datetime',
         'updated_time': 'datetime',
+        'status': 'str',
         'direction': 'str',
         'error': 'MessageError',
-        'rate': 'str',
-        'refund': 'str',
-        'total_cost': 'str',
-        'parts': 'int',
-        'message_type': 'str',
-        'mobile_country_code': 'str',
-        'mobile_network_code': 'str'
+        'redact': 'bool',
+        'channel_details': 'MessageChannelDetails'
     }
 
     attribute_map = {
         'uid': 'uid',
         'account_uid': 'account_uid',
+        'total_cost': 'total_cost',
+        'refund': 'refund',
         'source': 'source',
         'destination': 'destination',
-        'status': 'status',
-        'text': 'text',
-        'queued_time': 'queued_time',
+        'country': 'country',
+        'content_type': 'content_type',
+        'content': 'content',
+        'created_time': 'created_time',
         'sent_time': 'sent_time',
+        'delivered_time': 'delivered_time',
         'updated_time': 'updated_time',
+        'status': 'status',
         'direction': 'direction',
         'error': 'error',
-        'rate': 'rate',
-        'refund': 'refund',
-        'total_cost': 'total_cost',
-        'parts': 'parts',
-        'message_type': 'message_type',
-        'mobile_country_code': 'mobile_country_code',
-        'mobile_network_code': 'mobile_network_code'
+        'redact': 'redact',
+        'channel_details': 'channel_details'
     }
 
-    def __init__(self, uid=None, account_uid=None, source=None, destination=None, status=None, text=None, queued_time=None, sent_time=None, updated_time=None, direction=None, error=None, rate=None, refund=None, total_cost=None, parts=None, message_type=None, mobile_country_code=None, mobile_network_code=None):  # noqa: E501
+    def __init__(self, uid=None, account_uid=None, total_cost=None, refund=None, source=None, destination=None, country=None, content_type=None, content=None, created_time=None, sent_time=None, delivered_time=None, updated_time=None, status=None, direction=None, error=None, redact=None, channel_details=None):  # noqa: E501
         """Message - a model defined in Swagger"""  # noqa: E501
 
         self._uid = None
         self._account_uid = None
+        self._total_cost = None
+        self._refund = None
         self._source = None
         self._destination = None
-        self._status = None
-        self._text = None
-        self._queued_time = None
+        self._country = None
+        self._content_type = None
+        self._content = None
+        self._created_time = None
         self._sent_time = None
+        self._delivered_time = None
         self._updated_time = None
+        self._status = None
         self._direction = None
         self._error = None
-        self._rate = None
-        self._refund = None
-        self._total_cost = None
-        self._parts = None
-        self._message_type = None
-        self._mobile_country_code = None
-        self._mobile_network_code = None
+        self._redact = None
+        self._channel_details = None
         self.discriminator = None
 
         if uid is not None:
             self.uid = uid
         if account_uid is not None:
             self.account_uid = account_uid
+        if total_cost is not None:
+            self.total_cost = total_cost
+        if refund is not None:
+            self.refund = refund
         if source is not None:
             self.source = source
         if destination is not None:
             self.destination = destination
-        if status is not None:
-            self.status = status
-        if text is not None:
-            self.text = text
-        if queued_time is not None:
-            self.queued_time = queued_time
+        if country is not None:
+            self.country = country
+        if content_type is not None:
+            self.content_type = content_type
+        if content is not None:
+            self.content = content
+        if created_time is not None:
+            self.created_time = created_time
         if sent_time is not None:
             self.sent_time = sent_time
+        if delivered_time is not None:
+            self.delivered_time = delivered_time
         if updated_time is not None:
             self.updated_time = updated_time
+        if status is not None:
+            self.status = status
         if direction is not None:
             self.direction = direction
         if error is not None:
             self.error = error
-        if rate is not None:
-            self.rate = rate
-        if refund is not None:
-            self.refund = refund
-        if total_cost is not None:
-            self.total_cost = total_cost
-        if parts is not None:
-            self.parts = parts
-        if message_type is not None:
-            self.message_type = message_type
-        if mobile_country_code is not None:
-            self.mobile_country_code = mobile_country_code
-        if mobile_network_code is not None:
-            self.mobile_network_code = mobile_network_code
+        if redact is not None:
+            self.redact = redact
+        if channel_details is not None:
+            self.channel_details = channel_details
 
     @property
     def uid(self):
@@ -181,6 +183,52 @@ class Message(object):
         self._account_uid = account_uid
 
     @property
+    def total_cost(self):
+        """Gets the total_cost of this Message.  # noqa: E501
+
+        Total cost deducted from your credits for this message - `total_cost` will reflect refunds for this message. If there was a complete   refund, the `total_cost` will be zero.   # noqa: E501
+
+        :return: The total_cost of this Message.  # noqa: E501
+        :rtype: str
+        """
+        return self._total_cost
+
+    @total_cost.setter
+    def total_cost(self, total_cost):
+        """Sets the total_cost of this Message.
+
+        Total cost deducted from your credits for this message - `total_cost` will reflect refunds for this message. If there was a complete   refund, the `total_cost` will be zero.   # noqa: E501
+
+        :param total_cost: The total_cost of this Message.  # noqa: E501
+        :type: str
+        """
+
+        self._total_cost = total_cost
+
+    @property
+    def refund(self):
+        """Gets the refund of this Message.  # noqa: E501
+
+        If a refund was processed for this message `refund` will be a non-null number  # noqa: E501
+
+        :return: The refund of this Message.  # noqa: E501
+        :rtype: str
+        """
+        return self._refund
+
+    @refund.setter
+    def refund(self, refund):
+        """Sets the refund of this Message.
+
+        If a refund was processed for this message `refund` will be a non-null number  # noqa: E501
+
+        :param refund: The refund of this Message.  # noqa: E501
+        :type: str
+        """
+
+        self._refund = refund
+
+    @property
     def source(self):
         """Gets the source of this Message.  # noqa: E501
 
@@ -227,85 +275,106 @@ class Message(object):
         self._destination = destination
 
     @property
-    def status(self):
-        """Gets the status of this Message.  # noqa: E501
+    def country(self):
+        """Gets the country of this Message.  # noqa: E501
 
-        Current status of the message. Possible values: - `queued`: Message has been queued in Karix system             (for either `inbound` or `outbound` direction) - `sent`: The `outbound` message has been sent to carriers for delivery - `failed`: In case of `outbound` message, this means that Karix failed             to send the message to a carrier.             In case of `inbound` message, this means that Karix failed             to send the message to its webhook, if configured. - `delivered`: The `outbound` message was delivered to its receiver. - `undelivered`: The `outbound` message falied to be delivered to its receiver. - `rejected`: The `outbound` message was rejected by the chosen carrier.   # noqa: E501
+        ISO2 code of the country where the destination belongs to  # noqa: E501
 
-        :return: The status of this Message.  # noqa: E501
+        :return: The country of this Message.  # noqa: E501
         :rtype: str
         """
-        return self._status
+        return self._country
 
-    @status.setter
-    def status(self, status):
-        """Sets the status of this Message.
+    @country.setter
+    def country(self, country):
+        """Sets the country of this Message.
 
-        Current status of the message. Possible values: - `queued`: Message has been queued in Karix system             (for either `inbound` or `outbound` direction) - `sent`: The `outbound` message has been sent to carriers for delivery - `failed`: In case of `outbound` message, this means that Karix failed             to send the message to a carrier.             In case of `inbound` message, this means that Karix failed             to send the message to its webhook, if configured. - `delivered`: The `outbound` message was delivered to its receiver. - `undelivered`: The `outbound` message falied to be delivered to its receiver. - `rejected`: The `outbound` message was rejected by the chosen carrier.   # noqa: E501
+        ISO2 code of the country where the destination belongs to  # noqa: E501
 
-        :param status: The status of this Message.  # noqa: E501
+        :param country: The country of this Message.  # noqa: E501
         :type: str
         """
-        allowed_values = ["queued", "sent", "failed", "delivered", "undelivered", "rejected"]  # noqa: E501
-        if status not in allowed_values:
+
+        self._country = country
+
+    @property
+    def content_type(self):
+        """Gets the content_type of this Message.  # noqa: E501
+
+        Content type of the message. - Its value will correspond to the key present in the `content`.   # noqa: E501
+
+        :return: The content_type of this Message.  # noqa: E501
+        :rtype: str
+        """
+        return self._content_type
+
+    @content_type.setter
+    def content_type(self, content_type):
+        """Sets the content_type of this Message.
+
+        Content type of the message. - Its value will correspond to the key present in the `content`.   # noqa: E501
+
+        :param content_type: The content_type of this Message.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["text", "location"]  # noqa: E501
+        if content_type not in allowed_values:
             raise ValueError(
-                "Invalid value for `status` ({0}), must be one of {1}"  # noqa: E501
-                .format(status, allowed_values)
+                "Invalid value for `content_type` ({0}), must be one of {1}"  # noqa: E501
+                .format(content_type, allowed_values)
             )
 
-        self._status = status
+        self._content_type = content_type
 
     @property
-    def text(self):
-        """Gets the text of this Message.  # noqa: E501
+    def content(self):
+        """Gets the content of this Message.  # noqa: E501
 
-        Text of the message to be sent. - Message can contain non-GSM and unicode characters - A GSM only message with more than 160 characters will be automatically broken   into parts each of length 153 for billing purposes - A Non-GSM (and unicode) message with more than 70 characters will be automatically   broken into parts each of length 67 for billing purposes   # noqa: E501
 
-        :return: The text of this Message.  # noqa: E501
-        :rtype: str
+        :return: The content of this Message.  # noqa: E501
+        :rtype: MessageContent
         """
-        return self._text
+        return self._content
 
-    @text.setter
-    def text(self, text):
-        """Sets the text of this Message.
+    @content.setter
+    def content(self, content):
+        """Sets the content of this Message.
 
-        Text of the message to be sent. - Message can contain non-GSM and unicode characters - A GSM only message with more than 160 characters will be automatically broken   into parts each of length 153 for billing purposes - A Non-GSM (and unicode) message with more than 70 characters will be automatically   broken into parts each of length 67 for billing purposes   # noqa: E501
 
-        :param text: The text of this Message.  # noqa: E501
-        :type: str
+        :param content: The content of this Message.  # noqa: E501
+        :type: MessageContent
         """
 
-        self._text = text
+        self._content = content
 
     @property
-    def queued_time(self):
-        """Gets the queued_time of this Message.  # noqa: E501
+    def created_time(self):
+        """Gets the created_time of this Message.  # noqa: E501
 
-        The timestamp when message was accepted and queued in Karix system  # noqa: E501
+        Timestamp when the message was created  # noqa: E501
 
-        :return: The queued_time of this Message.  # noqa: E501
+        :return: The created_time of this Message.  # noqa: E501
         :rtype: datetime
         """
-        return self._queued_time
+        return self._created_time
 
-    @queued_time.setter
-    def queued_time(self, queued_time):
-        """Sets the queued_time of this Message.
+    @created_time.setter
+    def created_time(self, created_time):
+        """Sets the created_time of this Message.
 
-        The timestamp when message was accepted and queued in Karix system  # noqa: E501
+        Timestamp when the message was created  # noqa: E501
 
-        :param queued_time: The queued_time of this Message.  # noqa: E501
+        :param created_time: The created_time of this Message.  # noqa: E501
         :type: datetime
         """
 
-        self._queued_time = queued_time
+        self._created_time = created_time
 
     @property
     def sent_time(self):
         """Gets the sent_time of this Message.  # noqa: E501
 
-        The timestamp when the message was processed and sent to destination  # noqa: E501
+        Timestamp when message was sent to the selected channel  # noqa: E501
 
         :return: The sent_time of this Message.  # noqa: E501
         :rtype: datetime
@@ -316,7 +385,7 @@ class Message(object):
     def sent_time(self, sent_time):
         """Sets the sent_time of this Message.
 
-        The timestamp when the message was processed and sent to destination  # noqa: E501
+        Timestamp when message was sent to the selected channel  # noqa: E501
 
         :param sent_time: The sent_time of this Message.  # noqa: E501
         :type: datetime
@@ -325,10 +394,33 @@ class Message(object):
         self._sent_time = sent_time
 
     @property
+    def delivered_time(self):
+        """Gets the delivered_time of this Message.  # noqa: E501
+
+        Timestamp when the message was delivered to the destination  # noqa: E501
+
+        :return: The delivered_time of this Message.  # noqa: E501
+        :rtype: datetime
+        """
+        return self._delivered_time
+
+    @delivered_time.setter
+    def delivered_time(self, delivered_time):
+        """Sets the delivered_time of this Message.
+
+        Timestamp when the message was delivered to the destination  # noqa: E501
+
+        :param delivered_time: The delivered_time of this Message.  # noqa: E501
+        :type: datetime
+        """
+
+        self._delivered_time = delivered_time
+
+    @property
     def updated_time(self):
         """Gets the updated_time of this Message.  # noqa: E501
 
-        The timestamp when the status of message was last updated. - If the current status is `delivered` then this timestamp also represents   delivered time - If the current status is `undelivered` then this timestamp also represents   undelivered time   # noqa: E501
+        Timestamp when the message status was last updated - If the current status is `read`, then this timestamp also represents   read time - If the current status is `undelivered` then this timestamp also represents   undelivered time   # noqa: E501
 
         :return: The updated_time of this Message.  # noqa: E501
         :rtype: datetime
@@ -339,13 +431,42 @@ class Message(object):
     def updated_time(self, updated_time):
         """Sets the updated_time of this Message.
 
-        The timestamp when the status of message was last updated. - If the current status is `delivered` then this timestamp also represents   delivered time - If the current status is `undelivered` then this timestamp also represents   undelivered time   # noqa: E501
+        Timestamp when the message status was last updated - If the current status is `read`, then this timestamp also represents   read time - If the current status is `undelivered` then this timestamp also represents   undelivered time   # noqa: E501
 
         :param updated_time: The updated_time of this Message.  # noqa: E501
         :type: datetime
         """
 
         self._updated_time = updated_time
+
+    @property
+    def status(self):
+        """Gets the status of this Message.  # noqa: E501
+
+        Current status of the message. Possible values: - `queued`: Message has been queued in Karix system             (for either `inbound` or `outbound` direction) - `sent`: The `outbound` message has been sent to carriers for delivery - `failed`: In case of `outbound` message, this means that Karix failed             to send the message to a carrier.             In case of `inbound` message, this means that Karix failed             to send the message to its webhook, if configured. - `delivered`: The `outbound` message was delivered to its receiver. - `read`: The outbound message was delivered and read by the the receiver.           Not supported by `sms` channel. - `undelivered`: The `outbound` message falied to be delivered to its receiver. - `rejected`: The `outbound` message was rejected by the chosen carrier.   # noqa: E501
+
+        :return: The status of this Message.  # noqa: E501
+        :rtype: str
+        """
+        return self._status
+
+    @status.setter
+    def status(self, status):
+        """Sets the status of this Message.
+
+        Current status of the message. Possible values: - `queued`: Message has been queued in Karix system             (for either `inbound` or `outbound` direction) - `sent`: The `outbound` message has been sent to carriers for delivery - `failed`: In case of `outbound` message, this means that Karix failed             to send the message to a carrier.             In case of `inbound` message, this means that Karix failed             to send the message to its webhook, if configured. - `delivered`: The `outbound` message was delivered to its receiver. - `read`: The outbound message was delivered and read by the the receiver.           Not supported by `sms` channel. - `undelivered`: The `outbound` message falied to be delivered to its receiver. - `rejected`: The `outbound` message was rejected by the chosen carrier.   # noqa: E501
+
+        :param status: The status of this Message.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["queued", "sent", "failed", "delivered", "read", "undelivered", "rejected"]  # noqa: E501
+        if status not in allowed_values:
+            raise ValueError(
+                "Invalid value for `status` ({0}), must be one of {1}"  # noqa: E501
+                .format(status, allowed_values)
+            )
+
+        self._status = status
 
     @property
     def direction(self):
@@ -398,163 +519,48 @@ class Message(object):
         self._error = error
 
     @property
-    def rate(self):
-        """Gets the rate of this Message.  # noqa: E501
+    def redact(self):
+        """Gets the redact of this Message.  # noqa: E501
 
-        Cost per part of this message. Refer to [`text`](#/definitions/Message/properties/text)   # noqa: E501
+        If the message was redacted using redact message API, then `redact` will be `true`.   # noqa: E501
 
-        :return: The rate of this Message.  # noqa: E501
-        :rtype: str
+        :return: The redact of this Message.  # noqa: E501
+        :rtype: bool
         """
-        return self._rate
+        return self._redact
 
-    @rate.setter
-    def rate(self, rate):
-        """Sets the rate of this Message.
+    @redact.setter
+    def redact(self, redact):
+        """Sets the redact of this Message.
 
-        Cost per part of this message. Refer to [`text`](#/definitions/Message/properties/text)   # noqa: E501
+        If the message was redacted using redact message API, then `redact` will be `true`.   # noqa: E501
 
-        :param rate: The rate of this Message.  # noqa: E501
-        :type: str
+        :param redact: The redact of this Message.  # noqa: E501
+        :type: bool
         """
 
-        self._rate = rate
+        self._redact = redact
 
     @property
-    def refund(self):
-        """Gets the refund of this Message.  # noqa: E501
+    def channel_details(self):
+        """Gets the channel_details of this Message.  # noqa: E501
 
-        In case we are unable to send the message to destination after queueing we will refund the `total_cost` you were charged. `null` if there was no refund.   # noqa: E501
 
-        :return: The refund of this Message.  # noqa: E501
-        :rtype: str
+        :return: The channel_details of this Message.  # noqa: E501
+        :rtype: MessageChannelDetails
         """
-        return self._refund
+        return self._channel_details
 
-    @refund.setter
-    def refund(self, refund):
-        """Sets the refund of this Message.
+    @channel_details.setter
+    def channel_details(self, channel_details):
+        """Sets the channel_details of this Message.
 
-        In case we are unable to send the message to destination after queueing we will refund the `total_cost` you were charged. `null` if there was no refund.   # noqa: E501
 
-        :param refund: The refund of this Message.  # noqa: E501
-        :type: str
+        :param channel_details: The channel_details of this Message.  # noqa: E501
+        :type: MessageChannelDetails
         """
 
-        self._refund = refund
-
-    @property
-    def total_cost(self):
-        """Gets the total_cost of this Message.  # noqa: E501
-
-        Total cost for this message including all parts. Refer to [`text`](#/definitions/Message/properties/text)   # noqa: E501
-
-        :return: The total_cost of this Message.  # noqa: E501
-        :rtype: str
-        """
-        return self._total_cost
-
-    @total_cost.setter
-    def total_cost(self, total_cost):
-        """Sets the total_cost of this Message.
-
-        Total cost for this message including all parts. Refer to [`text`](#/definitions/Message/properties/text)   # noqa: E501
-
-        :param total_cost: The total_cost of this Message.  # noqa: E501
-        :type: str
-        """
-
-        self._total_cost = total_cost
-
-    @property
-    def parts(self):
-        """Gets the parts of this Message.  # noqa: E501
-
-        Number of parts to the message if the message was too long Refer to [`text`](#/definitions/Message/properties/text)   # noqa: E501
-
-        :return: The parts of this Message.  # noqa: E501
-        :rtype: int
-        """
-        return self._parts
-
-    @parts.setter
-    def parts(self, parts):
-        """Sets the parts of this Message.
-
-        Number of parts to the message if the message was too long Refer to [`text`](#/definitions/Message/properties/text)   # noqa: E501
-
-        :param parts: The parts of this Message.  # noqa: E501
-        :type: int
-        """
-
-        self._parts = parts
-
-    @property
-    def message_type(self):
-        """Gets the message_type of this Message.  # noqa: E501
-
-
-        :return: The message_type of this Message.  # noqa: E501
-        :rtype: str
-        """
-        return self._message_type
-
-    @message_type.setter
-    def message_type(self, message_type):
-        """Sets the message_type of this Message.
-
-
-        :param message_type: The message_type of this Message.  # noqa: E501
-        :type: str
-        """
-
-        self._message_type = message_type
-
-    @property
-    def mobile_country_code(self):
-        """Gets the mobile_country_code of this Message.  # noqa: E501
-
-        Mobile Country Code of the destination number. Refer to [Wikipedia: Mobile country code](https://en.wikipedia.org/wiki/Mobile_country_code)   # noqa: E501
-
-        :return: The mobile_country_code of this Message.  # noqa: E501
-        :rtype: str
-        """
-        return self._mobile_country_code
-
-    @mobile_country_code.setter
-    def mobile_country_code(self, mobile_country_code):
-        """Sets the mobile_country_code of this Message.
-
-        Mobile Country Code of the destination number. Refer to [Wikipedia: Mobile country code](https://en.wikipedia.org/wiki/Mobile_country_code)   # noqa: E501
-
-        :param mobile_country_code: The mobile_country_code of this Message.  # noqa: E501
-        :type: str
-        """
-
-        self._mobile_country_code = mobile_country_code
-
-    @property
-    def mobile_network_code(self):
-        """Gets the mobile_network_code of this Message.  # noqa: E501
-
-        Mobile Network Code of the destination number. Refer to [Wikipedia: Mobile country code](https://en.wikipedia.org/wiki/Mobile_country_code)   # noqa: E501
-
-        :return: The mobile_network_code of this Message.  # noqa: E501
-        :rtype: str
-        """
-        return self._mobile_network_code
-
-    @mobile_network_code.setter
-    def mobile_network_code(self, mobile_network_code):
-        """Sets the mobile_network_code of this Message.
-
-        Mobile Network Code of the destination number. Refer to [Wikipedia: Mobile country code](https://en.wikipedia.org/wiki/Mobile_country_code)   # noqa: E501
-
-        :param mobile_network_code: The mobile_network_code of this Message.  # noqa: E501
-        :type: str
-        """
-
-        self._mobile_network_code = mobile_network_code
+        self._channel_details = channel_details
 
     def to_dict(self):
         """Returns the model properties as a dict"""

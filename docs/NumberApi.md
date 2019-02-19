@@ -33,7 +33,7 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = karix.NumberApi(karix.ApiClient(configuration))
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 offset = 0 # int | The number of items to skip before starting to collect the result set. (optional) (default to 0)
 limit = 10 # int | The numbers of items to return. (optional) (default to 10)
 country = 'country_example' # str | Filter by country ISO (optional)
@@ -52,7 +52,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional] [default to 0]
  **limit** | **int**| The numbers of items to return. | [optional] [default to 10]
  **country** | **str**| Filter by country ISO | [optional] 
@@ -97,7 +97,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = karix.NumberApi(karix.ApiClient(configuration))
 num = 56 # int | Number which needs to be unrented
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 
 try:
     # Unrent number from your account
@@ -111,7 +111,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **num** | **int**| Number which needs to be unrented | 
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
 
 ### Return type
 
@@ -151,7 +151,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = karix.NumberApi(karix.ApiClient(configuration))
 num = 56 # int | Number for which details need to be fetched
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 
 try:
     # Get details of a number
@@ -166,7 +166,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **num** | **int**| Number for which details need to be fetched | 
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
 
 ### Return type
 
@@ -206,7 +206,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = karix.NumberApi(karix.ApiClient(configuration))
 num = 56 # int | Number which needs to be edited
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 number = karix.EditAccountNumber() # EditAccountNumber | Account Number object (optional)
 
 try:
@@ -222,7 +222,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **num** | **int**| Number which needs to be edited | 
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
  **number** | [**EditAccountNumber**](EditAccountNumber.md)| Account Number object | [optional] 
 
 ### Return type
@@ -263,7 +263,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = karix.NumberApi(karix.ApiClient(configuration))
 number = karix.RentNumber() # RentNumber | Rent Details object
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 
 try:
     # Rent a phone number
@@ -278,7 +278,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **number** | [**RentNumber**](RentNumber.md)| Rent Details object | 
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
 
 ### Return type
 

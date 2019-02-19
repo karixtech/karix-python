@@ -29,10 +29,10 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = karix.NumberSearchApi(karix.ApiClient(configuration))
-api_version = '1.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 1.0)
+api_version = '2.0' # str | API Version. If not specified your pinned verison is used. (optional) (default to 2.0)
 offset = 0 # int | The number of items to skip before starting to collect the result set. (optional) (default to 0)
 limit = 10 # int | The numbers of items to return. (optional) (default to 10)
-country = 'US' # str | Filter by country ISO. Only one country can be filtered at a time. If no country filter is provided then results for United States are returned by default.  (optional) (default to US)
+country = 'US' # str | Filter by country ISO. Only one country can be filtered at a time. If not country is provided results for United States are returned by default.  (optional) (default to US)
 prefix = 'prefix_example' # str | Filter by numbers with this prefix after country code (optional)
 contains = 'contains_example' # str | Filter by numbers which contain this value (optional)
 number_type = ['number_type_example'] # list[str] | Filter by number type: fixed, mobile, tollfree (optional)
@@ -49,10 +49,10 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 1.0]
+ **api_version** | **str**| API Version. If not specified your pinned verison is used. | [optional] [default to 2.0]
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional] [default to 0]
  **limit** | **int**| The numbers of items to return. | [optional] [default to 10]
- **country** | **str**| Filter by country ISO. Only one country can be filtered at a time. If no country filter is provided then results for United States are returned by default.  | [optional] [default to US]
+ **country** | **str**| Filter by country ISO. Only one country can be filtered at a time. If not country is provided results for United States are returned by default.  | [optional] [default to US]
  **prefix** | **str**| Filter by numbers with this prefix after country code | [optional] 
  **contains** | **str**| Filter by numbers which contain this value | [optional] 
  **number_type** | [**list[str]**](str.md)| Filter by number type: fixed, mobile, tollfree | [optional] 
